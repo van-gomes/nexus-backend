@@ -12,6 +12,7 @@ server.get('/', (request: Request, response: Response) => {
 })
 
 server.post('/user', userController.createUser);
+server.get('/users', userController.getAllUsers);
 
 server.listen(5000, () => console.log("Server Stone on"));
 
