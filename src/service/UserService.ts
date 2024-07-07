@@ -1,3 +1,9 @@
+export interface User {
+    name: string;
+    email: string;
+    password: string;
+}
+
 const db = [
     {
     name: "Joana",
@@ -7,6 +13,14 @@ const db = [
 ]
 
 export class UserService {
+    /*injeção de dependência para testar apenas createUser
+    e simular/trabalhar com um banco de dados*/
+    db: User[];
+
+    constructor(database = db) {
+         this.db = database;
+    }
+
     createUser = (name: string, email: string, password: string) => {
         const user = {
             name,
@@ -14,8 +28,8 @@ export class UserService {
             password
         }
 
-        db.push(user);
-        console.log('DB atualizado!', db);
+        this.db.push(user);
+        console.log('DB atualizado!', this.db);
     }
 
     getAllUser = () => {
