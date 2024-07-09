@@ -1,31 +1,30 @@
+import { Request } from 'express';
+import { makeMockResponse } from "../__mocks__/mockResponse.mock";
 import { UserService } from "../service/UserService";
 import { UserController } from "./UserController";
-import { Params } from "express-serve-static-core";
-import { Request, Response } from "express";
 
 describe('UserController', () => {
-    const mockUserService: Partial<UserService> = {}
+    const mockUserService: Partial<UserService> = {
+        createUser: jest.fn()
+    }
 
     const userController = new UserController(
         mockUserService as UserService
     );
 
-    /* Mocar os parâmetros request e response que são passados na função createUser */
-    const makeMockRequest = (
-        { params, query }: { params?: Params, query?: Params }): Request => {
-            const request = {
-                params: params || {},
-                query: params || {}
-            } as unknown;
-
-            return request as Request;
-        }
-
     it('deve adicionar um novo usuário', () => {
         console.log(userController);
 
-        const mockRequest = makeMockRequest({});
-
-       const response = userController.createUser(mockRequest);
+        const mockRequest = {
+            body: {
+                name: 'Lilian',
+                email: 'lilian@stone.com',
+                password: 'ls1234'
+            }
+        } as Request
+        const mockResponse = makeMockResponse();
+        userController.createUser(mockRequest, mockResponse);
+        expect(mockResponse.state.status).toBe(201);
+        expect(mockResponse.state.json).toMatchObject({message: 'Usuário criado com sucesso!'});
     })
 });
