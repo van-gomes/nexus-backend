@@ -1,7 +1,7 @@
 import { Request } from 'express';
-import { makeMockResponse } from "../__mocks__/mockResponse.mock";
-import { UserService } from "../service/UserService";
-import { UserController } from "./UserController";
+import { makeMockResponse } from '../__mocks__/mockResponse.mock';
+import { UserService } from '../service/UserService';
+import { UserController } from './UserController';
 
 describe('UserController', () => {
     const mockUserService: Partial<UserService> = {

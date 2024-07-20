@@ -1,4 +1,4 @@
-import { User, UserService } from "./UserService";
+import { User, UserService } from './UserService';
 
 describe('UserService', () => {
     const mockDB: User[] = [];
