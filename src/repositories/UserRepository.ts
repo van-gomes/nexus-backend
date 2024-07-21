@@ -1,14 +1,13 @@
-import { EntityManager } from "typeorm";
-import { AppDataSource } from "../database";
-import { User } from "../entites/User";
+import { EntityManager } from 'typeorm';
+import { User } from '../entites/User';
 
 export class UserRepository {
     private manager: EntityManager
 
     constructor(
-        manager = AppDataSource.manager
+        manager: EntityManager
     ){
-        this.manager = manager;
+        this.manager = manager
     }
 
     createUser = async (user: User) => {
